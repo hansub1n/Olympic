@@ -1,7 +1,7 @@
 import React from "react";
 
 const Medal = (props) => {
-	const inputContainer = {
+	const inputContainerStyle = {
 		display: "flex",
 		flexDirection: "column",
 		alignItem: "center",
@@ -23,20 +23,22 @@ const Medal = (props) => {
 		bronze: "동메달",
 	};
 
+	const inputHandler = (e) => {
+		setCountry({
+			...country,
+			[color]: Number(e.target.value),
+		});
+	};
+
 	return (
-		<p style={inputContainer}>
+		<p style={inputContainerStyle}>
 			{title[color]}
 			<input
 				type="number"
 				placeholder="0"
 				style={inputStyle}
 				value={country[color]}
-				onChange={(e) => {
-					setCountry({
-						...country,
-						[color]: Number(e.target.value),
-					});
-				}}
+				onChange={inputHandler}
 			/>
 		</p>
 	);

@@ -2,16 +2,23 @@ import React from "react";
 import Medal from "./Medal";
 
 const Form = (props) => {
-	const { country, setCountry, countries, setCountries } = props.formProps;
-
 	const inputGroupStyle = {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		marginBottom: "20px",
+		gap: "8px",
+		alignItems: "flex-end",
+	};
+
+	const inputContaintersStyle = {
 		display: "flex",
 		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "end",
 		gap: "10px",
 	};
-	const inputContainer = {
+	const inputContainerStyle = {
 		display: "flex",
 		flexDirection: "column",
 		alignItem: "center",
@@ -41,84 +48,87 @@ const Form = (props) => {
 		fontWeight: "550",
 	};
 
+	const { country, setCountry, countries, setCountries } = props.formProps;
+
 	const submitHandler = (event) => {
 		event.preventDefault();
 		addCountry();
 	};
 
+	const inputHandler = (e) => {
+		setCountry({
+			...country,
+			name: e.target.value,
+		});
+	};
+
 	const addCountry = () => {
 		const existingCountry = countries.find((c) => c.name === country.name);
-		if (existingCountry) {
-			alert("이미 등록된 국가입니다.");
-			return;
-		} else {
-			setCountries([...countries, country]);
+		if (country.name.trim() !== "") {
+			if (existingCountry) {
+				alert("이미 등록된 국가입니다.");
+				return;
+			} else {
+				setCountries([...countries, country]);
 
-			setCountry({
-				name: "",
-				gold: "",
-				silver: "",
-				bronze: "",
-			});
+				setCountry({
+					name: "",
+					gold: 0,
+					silver: 0,
+					bronze: 0,
+				});
+			}
+		} else {
+			alert("국가명을 입력하세요.");
 		}
 	};
+
 	const updateCountry = () => {
 		const existingCountry = countries.find((c) => c.name === country.name);
-		if (existingCountry) {
-			const updatedCountries = countries.map((c) => {
-				if (c.name === country.name) {
-					return {
-						...c,
-						gold: country.gold,
-						silver: country.silver,
-						bronze: country.bronze,
-					};
-				} else {
-					return c;
-				}
-			});
-			setCountries(updatedCountries);
+		if (country.name.trim() !== "") {
+			if (existingCountry) {
+				const updatedCountries = countries.map((c) => {
+					if (c.name === country.name) {
+						return {
+							...c,
+							gold: country.gold,
+							silver: country.silver,
+							bronze: country.bronze,
+						};
+					} else {
+						return c;
+					}
+				});
+				setCountries(updatedCountries);
 
-			setCountry({
-				name: "",
-				gold: "",
-				silver: "",
-				bronze: "",
-			});
+				setCountry({
+					name: "",
+					gold: 0,
+					silver: 0,
+					bronze: 0,
+				});
+			} else {
+				alert("등록되지 않은 국가입니다.");
+				return;
+			}
 		} else {
-			alert("등록되지 않은 국가입니다.");
-			return;
+			alert("국가명을 입력하세요.");
 		}
 	};
+
 	return (
 		<div>
 			<h1 style={titleStyle}>2024 파리 올림픽</h1>
-			<form
-				className="input-group"
-				onSubmit={submitHandler}
-				style={{
-					display: "flex",
-					flexDirection: "row",
-					justifyContent: "space-between",
-					marginBottom: "20px",
-					gap: "8px",
-					alignItems: "flex-end",
-				}}
-			>
-				<div style={inputGroupStyle}>
-					<p style={inputContainer}>
+			<form onSubmit={submitHandler} style={inputGroupStyle}>
+				<div style={inputContaintersStyle}>
+					<p style={inputContainerStyle}>
 						국가명
 						<input
 							type="text"
 							placeholder="국가 입력"
 							style={inputStyle}
 							value={country.name}
-							onChange={(e) => {
-								setCountry({
-									...country,
-									name: e.target.value,
-								});
-							}}
+							onChange={inputHandler}
 						/>
 					</p>
 					<Medal

@@ -1,10 +1,11 @@
-# Olympic Medal Tracke
+# Olympic Medal Tracker
 
-<br/><br/>
+<br/>
 
 #### 리액트 입문주차 개인과제
 
 2024 파리 올림픽에서 각 나라가 획득한 메달 수를 추적하는 `Olympic Medal Tracker` 입니다.<br/><br/>
+![alt text](image.png)
 
 #### 프로젝트 구조
 

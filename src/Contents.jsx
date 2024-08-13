@@ -1,4 +1,5 @@
 import React from "react";
+import "./Contents.css";
 
 const Contents = (props) => {
 	const { countries, setCountries } = props.contentsProps;
@@ -25,8 +26,8 @@ const Contents = (props) => {
 			}
 		});
 		return (
-			<div>
-				<table style={{ width: "100%" }}>
+			<div className="table-container">
+				<table className="table">
 					<thead>
 						<tr>
 							<td>국가명</td>

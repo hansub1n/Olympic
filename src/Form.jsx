@@ -4,14 +4,62 @@ import Medal from "./Medal";
 const Form = (props) => {
 	const { country, setCountry, countries, setCountries } = props.formProps;
 
-	const inputStyle = { display: "flex", flexDirection: "column" };
+	const inputGroupStyle = {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "end",
+		gap: "10px",
+	};
+	const inputContainer = {
+		display: "flex",
+		flexDirection: "column",
+		alignItem: "center",
+		textAlign: "center",
+		margin: "0",
+		gap: "5px",
+		fontWeight: "550",
+	};
+
+	const titleStyle = {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+	};
+	const inputStyle = {
+		height: "35px",
+		boxSizing: "border-box",
+		padding: "10px",
+	};
+	const buttonStyle = {
+		height: "35px",
+		boxSizing: "border-box",
+		padding: "5px 15px",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		fontWeight: "550",
+	};
+
+	const submitHandler = (event) => {
+		event.preventDefault();
+		addCountry();
+	};
 
 	const addCountry = () => {
 		const existingCountry = countries.find((c) => c.name === country.name);
 		if (existingCountry) {
 			alert("이미 등록된 국가입니다.");
+			return;
 		} else {
 			setCountries([...countries, country]);
+
+			setCountry({
+				name: "",
+				gold: "",
+				silver: "",
+				bronze: "",
+			});
 		}
 	};
 	const updateCountry = () => {
@@ -21,35 +69,49 @@ const Form = (props) => {
 				if (c.name === country.name) {
 					return {
 						...c,
-						gold,
-						silver,
-						bronze,
+						gold: country.gold,
+						silver: country.silver,
+						bronze: country.bronze,
 					};
 				} else {
 					return c;
 				}
 			});
 			setCountries(updatedCountries);
+
+			setCountry({
+				name: "",
+				gold: "",
+				silver: "",
+				bronze: "",
+			});
 		} else {
 			alert("등록되지 않은 국가입니다.");
+			return;
 		}
 	};
 	return (
 		<div>
-			<h1>2024 파리 올림픽</h1>
+			<h1 style={titleStyle}>2024 파리 올림픽</h1>
 			<form
 				className="input-group"
-				onSubmit={(event) => {
-					event.preventDefault();
-					addCountry();
+				onSubmit={submitHandler}
+				style={{
+					display: "flex",
+					flexDirection: "row",
+					justifyContent: "space-between",
+					marginBottom: "20px",
+					gap: "8px",
+					alignItems: "flex-end",
 				}}
 			>
-				<div style={{ display: "flex" }}>
-					<p style={inputStyle}>
+				<div style={inputGroupStyle}>
+					<p style={inputContainer}>
 						국가명
 						<input
 							type="text"
 							placeholder="국가 입력"
+							style={inputStyle}
 							value={country.name}
 							onChange={(e) => {
 								setCountry({
@@ -74,8 +136,23 @@ const Form = (props) => {
 						country={country}
 						setCountry={setCountry}
 					/>
-					<button type="submit">국가 추가</button>
-					<button type="button" onClick={updateCountry}>
+				</div>
+				<div
+					style={{
+						display: "flex",
+						flexShrink: "0",
+						gap: "10px",
+						alignItems: "center",
+					}}
+				>
+					<button type="submit" style={buttonStyle}>
+						국가 추가
+					</button>
+					<button
+						type="button"
+						style={buttonStyle}
+						onClick={updateCountry}
+					>
 						업데이트
 					</button>
 				</div>

@@ -8,9 +8,9 @@ const App = () => {
 	const [countries, setCountries] = useState([]);
 	const [country, setCountry] = useState({
 		name: "",
-		gold: 0,
-		silver: 0,
-		bronze: 0,
+		gold: "",
+		silver: "",
+		bronze: "",
 	});
 
 	const formProps = {

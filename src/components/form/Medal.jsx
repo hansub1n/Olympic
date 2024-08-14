@@ -1,21 +1,7 @@
 import React from "react";
+import "./Form.css";
 
 const Medal = (props) => {
-	const inputContainerStyle = {
-		display: "flex",
-		flexDirection: "column",
-		alignItem: "center",
-		textAlign: "center",
-		margin: "0",
-		gap: "5px",
-		fontWeight: "550",
-	};
-	const inputStyle = {
-		height: "35px",
-		boxSizing: "border-box",
-		padding: "10px",
-	};
-
 	const { color, country, setCountry } = props;
 	const title = {
 		gold: "금메달",
@@ -31,12 +17,12 @@ const Medal = (props) => {
 	};
 
 	return (
-		<p style={inputContainerStyle}>
+		<p className="form-input-container">
 			{title[color]}
 			<input
 				type="number"
 				placeholder="0"
-				style={inputStyle}
+				className="form-input"
 				value={country[color]}
 				onChange={inputHandler}
 			/>

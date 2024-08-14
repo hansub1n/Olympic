@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import "./App.css";
-import Contents from "./components/Contents";
-import Form from "./components/Form";
+import Contents from "./components/contents/Contents";
+import Form from "./components/form/Form";
 
 const App = () => {
 	const [countries, setCountries] = useState([]);

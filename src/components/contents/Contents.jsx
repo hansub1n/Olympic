@@ -16,7 +16,7 @@ const Contents = (props) => {
 		}
 	});
 
-	const deletHandler = (c) => {
+	const deleteHandler = (c) => {
 		const filteredItems = countries.filter(
 			(selectiedCountry) => selectiedCountry.name !== c.name
 		);
@@ -30,7 +30,7 @@ const Contents = (props) => {
 			<td>{c.silver}</td>
 			<td>{c.bronze}</td>
 			<td>
-				<button onClick={() => deletHandler(c)}>삭제</button>
+				<button onClick={() => deleteHandler(c)}>삭제</button>
 			</td>
 		</tr>
 	));
